@@ -18,4 +18,14 @@ public class Complex
 
         return result;
     }
+
+    public static Complex Multiply(Complex c1, Complex c2)
+    {
+        double real = c1.Real*c2.Real - c1.Imaginary*c2.Imaginary;
+        double imaginary = c1.Real*c2.Imaginary + c1.Imaginary*c2.Real;
+
+        var result = new Complex(real,imaginary);
+
+        return result;
+    }
 }

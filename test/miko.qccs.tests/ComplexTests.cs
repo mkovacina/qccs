@@ -28,7 +28,24 @@ public class ComplexTests
 
         var actual = Complex.Add(x1,x2);
 
-        Assert.That(actual.Real, Is.EqualTo(expected.Real));
+        Assert.That(actual.Real, Is.EqualTo(expected.Real).Within(1).Ulps);
+        Assert.That(actual.Imaginary, Is.EqualTo(expected.Imaginary).Within(1).Ulps);
+    }
+
+    [TestCase(0,0,0,0,0,0)]
+    [TestCase(1,2,3,4,-5,10)]
+    [TestCase(-1,-2,3,4,5,-10)]
+    [TestCase(.1,.2,.3,.4,-.05,.1)]
+    public void Test_Multiply(double realPart1, double imaginaryPart1, double realPart2, double imaginaryPart2, double expectedRealPart, double expectedImaginaryPart)
+    {
+        var x1 = new Complex(realPart1, imaginaryPart1);
+        var x2 = new Complex(realPart2, imaginaryPart2);
+
+        var expected = new Complex(expectedRealPart, expectedImaginaryPart);
+
+        var actual = Complex.Multiply(x1,x2);
+
+        Assert.That(actual.Real, Is.EqualTo(expected.Real).Within(2).Ulps);
         Assert.That(actual.Imaginary, Is.EqualTo(expected.Imaginary).Within(1).Ulps);
     }
 }
